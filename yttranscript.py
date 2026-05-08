@@ -29,8 +29,8 @@ def main():
         print(f"Error: could not extract video ID from URL: {url}")
         sys.exit(1)
 
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-    text = " ".join(entry["text"] for entry in transcript)
+    transcript = YouTubeTranscriptApi().fetch(video_id)
+    text = " ".join(snippet.text for snippet in transcript)
 
     # Collapse whitespace and normalize newlines from caption line breaks
     text = re.sub(r"\s+", " ", text).strip()
